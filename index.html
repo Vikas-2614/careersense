@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>CareerSense – AI Career & Resume Analyzer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="background-gradient"></div>
+
+    <div class="app-shell">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-circle">CS</div>
+                <div>
+                    <h2 class="sidebar-title">CareerSense</h2>
+                    <p class="sidebar-subtitle">AI Career Guide</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-item">
+                    <span class="nav-icon">💼</span>
+                    <span>Roles</span>
+                </button>
+                <button class="nav-item">
+                    <span class="nav-icon">📄</span>
+                    <span>Resume</span>
+                </button>
+                <button class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Settings</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p class="sidebar-footer-title">Today</p>
+                <p id="sidebarDate" class="sidebar-footer-date"></p>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main">
+            <!-- Top header -->
+            <header class="main-header">
+                <div>
+                    <h1 id="welcomeTitle">Welcome 👋</h1>
+                    <p class="subtitle">
+                        Discover your best-matching tech roles and improve your resume with AI.
+                    </p>
+                </div>
+                <div class="header-actions">
+                    <button id="themeToggle" class="btn ghost small">
+                        Toggle Theme
+                    </button>
+                </div>
+            </header>
+
+            <!-- Stats row -->
+            <section class="stats-row">
+                <div class="stat-card">
+                    <p class="stat-label">CGPA</p>
+                    <p id="statCGPA" class="stat-value">-</p>
+                    <div class="stat-bar">
+                        <div id="statBarCGPA" class="stat-bar-fill"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-label">Total Skills</p>
+                    <p id="statSkills" class="stat-value">0</p>
+                    <div class="stat-bar">
+                        <div id="statBarSkills" class="stat-bar-fill green"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-label">Tech Profile Strength</p>
+                    <p id="statProfileStrength" class="stat-value">-</p>
+                    <div class="stat-bar">
+                        <div id="statBarProfile" class="stat-bar-fill amber"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-label">AI Resume Score</p>
+                    <p id="statResumeScore" class="stat-value danger">-</p>
+                    <div class="stat-bar">
+                        <div id="statBarResume" class="stat-bar-fill red"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main content row -->
+            <section class="content-row">
+                <!-- Left Column: Profile + Resume -->
+                <div class="left-column">
+                    <!-- Profile & Skills -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h2>Student Profile</h2>
+                            <span class="chip chip-accent">Input</span>
+                        </div>
+
+                        <form id="profileForm">
+                            <div class="field-group">
+                                <div class="field">
+                                    <label for="nameInput">Name</label>
+                                    <input
+                                        type="text"
+                                        id="nameInput"
+                                        placeholder="e.g. Vikas"
+                                    />
+                                </div>
+                                <div class="field">
+                                    <label for="yearSelect">Year</label>
+                                    <select id="yearSelect">
+                                        <option value="">Select year</option>
+                                        <option value="1">1st Year</option>
+                                        <option value="2">2nd Year</option>
+                                        <option value="3">3rd Year</option>
+                                        <option value="4">4th Year</option>
+                                        <option value="grad">Graduate</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="field-group">
+                                <div class="field">
+                                    <label for="cgpaInput">CGPA</label>
+                                    <input
+                                        type="number"
+                                        id="cgpaInput"
+                                        step="0.1"
+                                        min="0"
+                                        max="10"
+                                        placeholder="e.g. 7.8"
+                                    />
+                                </div>
+                                <div class="field">
+                                    <label for="interestsInput">
+                                        Interests (comma separated)
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="interestsInput"
+                                        placeholder="e.g. AI, Web Dev, UI/UX"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label>Skills (select your known skills)</label>
+                                <div class="skill-grid">
+                                    <!-- Each checkbox value is a skill string -->
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="Python" />
+                                        <span>Python</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="Java" />
+                                        <span>Java</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="C++" />
+                                        <span>C++</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="HTML" />
+                                        <span>HTML</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="CSS" />
+                                        <span>CSS</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="JavaScript" />
+                                        <span>JavaScript</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="React" />
+                                        <span>React</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="Node.js" />
+                                        <span>Node.js</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="Django" />
+                                        <span>Django</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="SQL" />
+                                        <span>SQL</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="MongoDB" />
+                                        <span>MongoDB</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="Machine Learning" />
+                                        <span>Machine Learning</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="Deep Learning" />
+                                        <span>Deep Learning</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="Data Analysis" />
+                                        <span>Data Analysis</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="UI/UX Design" />
+                                        <span>UI/UX Design</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="Figma" />
+                                        <span>Figma</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="Flutter" />
+                                        <span>Flutter</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="DevOps" />
+                                        <span>DevOps</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="Git" />
+                                        <span>Git / GitHub</span>
+                                    </label>
+                                    <label class="skill-pill">
+                                        <input type="checkbox" class="skill-checkbox" value="Cybersecurity" />
+                                        <span>Cybersecurity</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label for="customSkillsInput">
+                                    Other skills (comma separated)
+                                </label>
+                                <input
+                                    type="text"
+                                    id="customSkillsInput"
+                                    placeholder="e.g. Power BI, Cloud, C, Communication"
+                                />
+                            </div>
+
+                            <button type="button" id="analyzeBtn" class="btn primary w-100">
+                                Analyze with AI
+                            </button>
+                        </form>
+                    </section>
+
+                    <!-- Resume -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h2>Resume Analyzer</h2>
+                            <span class="chip">Paste your resume text</span>
+                        </div>
+
+                        <div class="field">
+                            <label for="resumeText">
+                                Paste your resume content (summary, projects, skills, etc.)
+                            </label>
+                            <textarea
+                                id="resumeText"
+                                rows="8"
+                                placeholder="Paste your resume text here for AI analysis..."
+                            ></textarea>
+                        </div>
+
+                        <div class="resume-result-row">
+                            <div class="resume-score-block">
+                                <p class="resume-score-label">AI Resume Score</p>
+                                <p id="resumeScoreValue" class="resume-score-value">- / 100</p>
+                                <div class="stat-bar">
+                                    <div id="resumeScoreBar" class="stat-bar-fill red"></div>
+                                </div>
+                            </div>
+                            <ul id="resumeSuggestions" class="resume-suggestions">
+                                <!-- Suggestions injected here -->
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right Column: AI Role Recommendations -->
+                <div class="right-column">
+                    <!-- Recommended Roles -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h2>AI Recommended Roles</h2>
+                            <span class="inline-note">Top matches based on your skills, CGPA & interests</span>
+                        </div>
+
+                        <div id="roleResults" class="role-results">
+                            <p class="small-text muted">
+                                Fill your profile on the left and click “Analyze with AI” to see suggested roles.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Skill Gap & Roadmap -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h2>Skill Gap & Learning Roadmap</h2>
+                            <span class="inline-note">Based on the top recommended role</span>
+                        </div>
+
+                        <div id="gapResults" class="gap-results">
+                            <p class="small-text muted">
+                                Once roles are suggested, AI will show which skills you are missing and how to improve step-by-step.
+                            </p>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <footer class="app-footer">
+                Built with <span>HTML</span>, <span>CSS</span>, <span>JavaScript</span>
+                &amp; <span>Rule-based AI</span> | CareerSense – Mini Project
+            </footer>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
